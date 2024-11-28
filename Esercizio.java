@@ -1,26 +1,50 @@
-//LEGGERE LE ISTRUZIONI NEL FILE README.md
-
-//Import di Classi Java necessarie al funzionamento del programma
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
-// Classe principale, con metodo main
-class Esercizio {
-    // Il programma parte con una chiamata a main().
-    public static void main(String args[])
-    {
-        //Variabili del programma
-        String nome;
+public class Main {
+    public static void main(String[] args) {
+        int n, i, iMin;
 
-        //Creo l'oggetto in per l'input da tastiera
-        Scanner in = new Scanner( System.in );
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Quanti atleti ci sono in gara?");
+        n = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
 
-        //Leggo l'input da tastiera
-        System.out.print("Inserisci il tuo nome: ");
-        nome = in.nextLine();
+        List<String> nomi = new ArrayList<>(n);
+        List<String> nazionali = new ArrayList<>(n);
+        List<Float> tempi = new ArrayList<>(n);
 
-        //Output del nome acquisito da tastiera
-        System.out.println("Ciao "+nome+"!");
+        for (i = 0; i < n; i++) {
+            System.out.println("nome " + (i + 1) + "° atleta: ");
+            nomi.add(scanner.nextLine());
+            System.out.println("Nazionale " + (i + 1) + "° atleta: ");
+            nazionali.add(scanner.nextLine());
+            System.out.println("Tempo " + (i + 1) + "° atleta: ");
+            tempi.add(scanner.nextFloat());
+            scanner.nextLine(); // Consume newline
+        }
+
+        System.out.println("Informazioni inserite");
+        for (i = 0; i < n; i++) {
+            System.out.println((i + 1) + "° atleta: " + nomi.get(i) + "; nazionale: " + nazionali.get(i)
+                    + "; tempo: " + tempi.get(i));
+        }
+
+        System.out.println("Ricerca dell'atleta vincitore");
+        float min = tempi.get(0);
+        iMin = 0;
+
+        for (i = 1; i < nomi.size(); i++) {
+            if (tempi.get(i) < min) {
+                iMin = i;
+                min = tempi.get(i);
+            }
+        }
+
+        System.out.println("Atleta vincitore: " + nomi.get(iMin)
+                + "; nazionale: " + nazionali.get(iMin) + "; tempo: " + tempi.get(iMin));
+        
+        scanner.close();
     }
 }
-
-//LEGGERE LE ISTRUZIONI NEL FILE README.md
